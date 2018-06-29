@@ -1,5 +1,30 @@
 # How Does One Use This?
 
+## What is different in this Terraform scripts
+Prereq - 
+AWS access key and access secret key
+R53 domain on AWS, that will replace <your main domain> in the script below 
+
+Following changes in the script from original script downloaded from pivnet 
+Skipped the hosted zone/subdomain creation 
+Changed dns.tf to find out the AWS-CM cert based on the root domain
+Removed entries for PEM cert and key
+Used AWS-CM ARN for ELBs 
+Changed the name of the Web ELB
+And changed security groups for all of the ELBs
+I was able to run the scripts without issues, lay out the AWS IaaS and setup Ops Manager.
+However, I ran into issues while setting up PAS tile. The smoke test failed as it was unable to access the API endpoint.
+The root cause was that the Web ELB had incorrect security group, or rather, a different security group after config was changed. 
+I changed the Web ELB config from the AWS console to use 'elb_security_group'. 
+
+Once that was done I was able to deploy the PAS tile, validate the Apps Manager. 
+I deployed a REST app using CF Push so that too is validated. 
+So our objective of standing up a sandbox PCF 2.0 on AWS with your initial requirements is achieved. 
+
+Apps Manager URL for that should be - https://apps.sys.<your main domain>
+To access credentials use PAS tile > Credentials tab > UAA > Admin Credentials. 
+For Terraform you can refer to this GIT for the latest scripts. 
+
 ## What Does This Do?
 
 A booted ops-manager plus a whole BOATLOAD of other goodies, including:
