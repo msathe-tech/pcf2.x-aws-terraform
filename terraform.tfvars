@@ -1,0 +1,9 @@
+env_name           = "pcf"
+access_key         = "<your AWS access_key>"
+secret_key         = "<your AWS secret_key>"
+region             = "us-east-1"
+availability_zones = ["us-east-1a", "us-east-1c", "us-east-1b"]
+ops_manager_ami    = "ami-b48eb3ce"
+rds_instance_count = 0
+dns_suffix         = "<your main domain>.com"
+ssl_cert = ""
